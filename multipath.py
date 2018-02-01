@@ -36,3 +36,15 @@ def flush(device):
     cmd = 'multipath -f {0}'.format(device)
     return __salt__['cmd.run'](cmd).splitlines()
 
+def flush_all(device):
+    '''
+    Multipath flush all
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' multipath.flush_all
+    '''
+    cmd = 'multipath -F'
+    return __salt__['cmd.run'](cmd).splitlines()
