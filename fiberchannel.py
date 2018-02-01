@@ -35,10 +35,9 @@ def rescan_all():
     '''
 
     dir_base = '/sys/class/fc_host'
-    out = []
 
     for host in os.listdir(dir_base):
         cmd = 'echo "1" > {0}/{1}/issue_lip'.format(dir_base, host)
-        __salt__['cmd.run'](cmd).splitlines()
+        __salt__['cmd.run'](cmd)
 
     return True
