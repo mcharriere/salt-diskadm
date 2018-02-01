@@ -4,6 +4,7 @@ Multipath module
 '''
 from __future__ import absolute_import, print_function, unicode_literals
 import os.path
+import re
 
 
 def list():
@@ -48,3 +49,29 @@ def flush_all(device):
     '''
     cmd = 'multipath -F'
     return __salt__['cmd.run'](cmd).splitlines()
+
+def get_hcil(device):
+    '''
+    Get HCIL of a path
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' multipath.get_hcil mpath1
+    '''
+
+    path_re = re.compile("(\w*) (\d:\d:\d:\d)")
+
+    cmd = 'multipathd show paths format "%w %i"'
+    ret = []
+    
+    for line in __salt__['cmd.run'](cmd).splitlines()
+        
+        path, hcil = path_re.match(line).groups()
+        if device == path:
+            ret.append(hcil)
+        return '{0} does not exist'.format(path)
+
+    return ret
+     
