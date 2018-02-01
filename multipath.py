@@ -67,9 +67,11 @@ def get_hcil(device):
     ret = []
     
     for line in __salt__['cmd.run'](cmd).splitlines():
-        path, hcil = path_re.match(line).groups()
-        if device == path:
-            ret.append(hcil)
+        match = path_re.match(line)
+        if match:
+            path, hcil = match.groups()
+            if device == path:
+                ret.append(hcil)
 
     if len(ret) == 0:
         return '{0} does not exist'.format(device)
