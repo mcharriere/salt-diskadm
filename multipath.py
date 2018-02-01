@@ -61,7 +61,7 @@ def get_hcil(device):
         salt '*' multipath.get_hcil mpath1
     '''
 
-    path_re = re.compile("(\w*) ([\d+:\d+:\d+:\d+)")
+    path_re = re.compile("(\w*) (\d+:\d+:\d+:\d+)")
 
     cmd = 'multipathd show paths format "%w %i"'
     ret = []
