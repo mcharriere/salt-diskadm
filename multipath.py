@@ -66,12 +66,13 @@ def get_hcil(device):
     cmd = 'multipathd show paths format "%w %i"'
     ret = []
     
-    for line in __salt__['cmd.run'](cmd).splitlines()
-        
+    for line in __salt__['cmd.run'](cmd).splitlines():
         path, hcil = path_re.match(line).groups()
         if device == path:
             ret.append(hcil)
-        return '{0} does not exist'.format(path)
+
+    if len(ret) == 0:
+        return '{0} does not exist'.format(device)
 
     return ret
      
