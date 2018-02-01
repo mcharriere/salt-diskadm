@@ -35,10 +35,10 @@ def rescan_all():
     '''
 
     dir_base = '/sys/class/fc_host'
+    out = []
 
-    for d in os.listdir(dir_base):
-    if os.path.isdir('{0}/host{1}'.format(dir_base, host)):
-        cmd = 'echo "1" > {0}/host{1}/issue_lip'.format(dir_base, host)
-    else:
-        return 'Host {0} does not exist'.format(host)
-    return __salt__['cmd.run'](cmd).splitlines()
+    for host in os.listdir(dir_base):
+        cmd = 'echo "1" > {0}/{1}/issue_lip'.format(dir_base, host)
+        __salt__['cmd.run'](cmd).splitlines()
+
+    return True
