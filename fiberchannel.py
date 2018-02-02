@@ -3,7 +3,8 @@
 FiberChannel module
 '''
 from __future__ import absolute_import, print_function, unicode_literals
-import os.path, os.listdir
+import os
+import os.path
 import re
 
 
@@ -21,7 +22,7 @@ def rescan(host):
         cmd = 'echo "1" > /sys/class/fc_host/host{0}/issue_lip'.format(host)
     else:
         return 'Host {0} does not exist'.format(host)
-    return __salt__['cmd.run'](cmd).splitlines()
+    return __salt__['cmd.run'](cmd)
 
 def rescan_all():
     '''
